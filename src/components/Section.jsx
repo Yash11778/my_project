@@ -1,7 +1,6 @@
 import React, { forwardRef } from "react";
 import SectionSvg from "../assets/svg/SectionSvg";
 
-// Fix the ref warning by using forwardRef
 const Section = forwardRef(
   (
     { className, id, crosses, crossesOffset, customPaddings, children },
@@ -45,7 +44,6 @@ const Section = forwardRef(
   }
 );
 
-// Add a display name to avoid warnings
 Section.displayName = "Section";
 
 export default Section;
