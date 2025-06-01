@@ -61,7 +61,7 @@ const ExpoEvent = () => {
                 <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-color-2/20 to-color-3/20 rounded-full blur-3xl -z-10"></div>
                 <div className="text-5xl mb-4">🎭</div>
                 <h3 className="text-xl font-bold mb-3 bg-clip-text text-transparent bg-gradient-to-r from-color-2 to-color-3">Finalist Presentations</h3>
-                <p className="text-n-3 mb-6 flex-grow">Top 10 teams selected from the Expo Showcase present their solutions on the main stage to all attendees, demonstrating their technical innovations and business potential.</p>
+                <p className="text-n-3 mb-6 flex-grow">Top teams selected from the Expo Showcase present their solutions on the main stage to all attendees, demonstrating their technical innovations and business potential.</p>
               </div>
             </motion.div>
             
