@@ -1,21 +1,22 @@
 import { useEffect, useRef, useState } from "react";
-import { Link, useNavigate } from "react-router-dom"; // Add Link import
+import { Link, useNavigate } from "react-router-dom";
 import Section from "./Section";
 import { motion, AnimatePresence } from "framer-motion";
 import Button from "./Button";
 import * as THREE from "three";
 import { eventHighlights } from "../constants";
+import LoadingScreen from "./LoadingScreen"; // Import the new LoadingScreen component
 
 const Hero = () => {
   const canvasRef = useRef(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true); // Re-add loading state
   const navigate = useNavigate();
   
   useEffect(() => {
-    // Simulate loading time
+    // Simulate loading time with a shorter duration
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 4000);
+    }, 2000); // Shorter loading time - just 2 seconds
     
     return () => clearTimeout(timer);
   }, []);
@@ -419,416 +420,6 @@ const Hero = () => {
     };
   }, []);
   
-  // Loading animation component
-  const LoadingScreen = () => {
-    return (
-      <AnimatePresence>
-        {loading && (
-          <motion.div 
-            className="fixed inset-0 z-50 flex items-center justify-center bg-n-8"
-            initial={{ opacity: 1 }}
-            exit={{ 
-              opacity: 0,
-              transition: { delay: 0.2, duration: 0.8 }
-            }}
-          >
-            {/* Dynamic grid background */}
-            <div className="absolute inset-0 overflow-hidden">
-              <div className="absolute inset-0 opacity-20">
-                {[...Array(10)].map((_, i) => (
-                  <motion.div
-                    key={`h-line-${i}`}
-                    className="absolute h-px w-full bg-gradient-to-r from-transparent via-[#4361EE] to-transparent"
-                    style={{ top: `${i * 10}%` }}
-                    animate={{
-                      x: ['-100%', '100%']
-                    }}
-                    transition={{
-                      duration: Math.random() * 5 + 5,
-                      repeat: Infinity,
-                      ease: "linear",
-                      delay: Math.random() * 2
-                    }}
-                  />
-                ))}
-                {[...Array(10)].map((_, i) => (
-                  <motion.div
-                    key={`v-line-${i}`}
-                    className="absolute w-px h-full bg-gradient-to-b from-transparent via-[#7209B7] to-transparent"
-                    style={{ left: `${i * 10}%` }}
-                    animate={{
-                      y: ['-100%', '100%']
-                    }}
-                    transition={{
-                      duration: Math.random() * 5 + 5,
-                      repeat: Infinity,
-                      ease: "linear",
-                      delay: Math.random() * 2
-                    }}
-                  />
-                ))}
-              </div>
-            </div>
-
-            {/* Binary code rain effect */}
-            <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-10">
-              {[...Array(15)].map((_, i) => (
-                <motion.div
-                  key={`binary-${i}`}
-                  className="absolute text-xs font-mono text-[#4CC9F0] whitespace-nowrap"
-                  style={{ 
-                    left: `${Math.random() * 100}%`,
-                    top: -100,
-                  }}
-                  animate={{
-                    y: [null, window.innerHeight + 100],
-                  }}
-                  transition={{
-                    duration: Math.random() * 10 + 10,
-                    repeat: Infinity,
-                    ease: "linear",
-                    delay: Math.random() * 5
-                  }}
-                >
-                  {[...Array(20)].map(() => Math.round(Math.random())).join('')}
-                </motion.div>
-              ))}
-            </div>
-            
-            <div className="flex flex-col items-center z-10">
-              {/* Logo Animation */}
-              <motion.div
-                initial={{ scale: 0, opacity: 0 }}
-                animate={{ 
-                  scale: 1,
-                  opacity: 1,
-                }}
-                transition={{
-                  type: "spring",
-                  stiffness: 200,
-                  damping: 20,
-                  duration: 1
-                }}
-                className="mb-8 relative"
-              >
-                {/* Orbital rings around logo */}
-                {[...Array(3)].map((_, i) => (
-                  <motion.div
-                    key={`ring-${i}`}
-                    className="absolute rounded-full border-[1px]"
-                    style={{
-                      width: 180 + i * 40,
-                      height: 180 + i * 40,
-                      top: `${-(i * 20)}px`,
-                      left: `${-(i * 20)}px`,
-                      borderColor: i === 0 ? "#4CC9F0" : i === 1 ? "#4361EE" : "#7209B7"
-                    }}
-                    initial={{ opacity: 0 }}
-                    animate={{ 
-                      opacity: [0, 0.5, 0],
-                      scale: [0.8, 1, 1.2],
-                      rotate: [0, 360],
-                    }}
-                    transition={{
-                      duration: 8,
-                      repeat: Infinity,
-                      delay: i * 0.6,
-                      ease: "linear"
-                    }}
-                  />
-                ))}
-
-                {/* Logo container with glow effect */}
-                <motion.div 
-                  className="w-40 h-40 rounded-md flex items-center justify-center relative"
-                  animate={{ 
-                    boxShadow: [
-                      '0 0 0 rgba(67, 97, 238, 0)',
-                      '0 0 30px rgba(67, 97, 238, 0.7)',
-                      '0 0 0 rgba(67, 97, 238, 0)'
-                    ]
-                  }}
-                  transition={{ 
-                    duration: 3, 
-                    repeat: Infinity,
-                    repeatType: "reverse"
-                  }}
-                >
-                  {/* Logo with reveal animation */}
-                  <div className="relative w-32 h-32">
-                    <motion.div
-                      className="absolute inset-0 overflow-hidden"
-                      initial={{ height: 0 }}
-                      animate={{ height: "100%" }}
-                      transition={{ duration: 1.2, delay: 0.5, ease: "easeInOut" }}
-                    >
-                      <img 
-                        src="/src/assets/logo.png" 
-                        alt="HacKronyX Logo" 
-                        className="w-full h-full object-contain"
-                      />
-                    </motion.div>
-                  </div>
-                  
-                  {/* Particle burst effect when logo appears */}
-                  <motion.div className="absolute inset-0 flex items-center justify-center">
-                    {[...Array(20)].map((_, i) => (
-                      <motion.div
-                        key={`particle-${i}`}
-                        className="absolute w-1 h-1 rounded-full"
-                        style={{
-                          background: i % 2 === 0 ? '#4CC9F0' : '#7209B7'
-                        }}
-                        initial={{ scale: 0 }}
-                        animate={{
-                          scale: [0, 1, 0],
-                          x: [0, Math.cos(i * 18 * Math.PI / 180) * 100],
-                          y: [0, Math.sin(i * 18 * Math.PI / 180) * 100],
-                          opacity: [0, 1, 0]
-                        }}
-                        transition={{
-                          duration: 1,
-                          delay: 1.7,
-                          ease: "easeOut"
-                        }}
-                      />
-                    ))}
-                  </motion.div>
-                </motion.div>
-              </motion.div>
-              
-              {/* Text Animation with typing effect */}
-              <div className="overflow-hidden relative">
-                <motion.h2
-                  className="text-3xl font-bold bg-gradient-to-r from-[#4CC9F0] to-[#7209B7] bg-clip-text text-transparent"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 1.8, duration: 0.5 }}
-                >
-                  HacKronyX 2025
-                </motion.h2>
-                
-                {/* Typing cursor effect */}
-                <motion.div 
-                  className="absolute right-0 top-0 h-full w-full bg-n-8"
-                  initial={{ x: "-100%" }}
-                  animate={{ x: "100%" }}
-                  transition={{ 
-                    duration: 1.2, 
-                    delay: 1.8, 
-                    ease: "easeInOut" 
-                  }}
-                />
-              </div>
-              
-              <motion.p 
-                className="text-n-3 mt-2 overflow-hidden"
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 2.2, duration: 0.5 }}
-              >
-                <span className="inline-block">Initializing innovation...</span>
-              </motion.p>
-              
-              {/* Loading Bar with segments */}
-              <div className="mt-8 relative w-64">
-                <motion.div 
-                  className="w-full h-1.5 bg-n-6 rounded-full overflow-hidden"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 2.4, duration: 0.5 }}
-                >
-                  {/* Segmented loading sections */}
-                  {[...Array(5)].map((_, i) => (
-                    <motion.div 
-                      key={`segment-${i}`}
-                      className="h-full bg-gradient-to-r from-[#4CC9F0] to-[#7209B7] absolute"
-                      style={{
-                        left: `${i * 20}%`,
-                        width: '20%'
-                      }}
-                      initial={{ scaleX: 0, originX: 0 }}
-                      animate={{ scaleX: 1 }}
-                      transition={{ 
-                        delay: 2.6 + (i * 0.2), 
-                        duration: 0.4,
-                        ease: "easeOut"
-                      }}
-                    />
-                  ))}
-                </motion.div>
-                
-                {/* Loading percentage with counting animation */}
-                <motion.div
-                  className="text-xs text-n-3 absolute right-0 top-4 flex items-center"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 2.6 }}
-                >
-                  <motion.span
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{
-                      duration: 0.3,
-                      repeat: 8,
-                      repeatType: "reverse",
-                      repeatDelay: 0.1
-                    }}
-                    className="inline-block w-1 h-3 bg-[#4CC9F0] mr-2"
-                  />
-                  <motion.span
-                    initial={{ count: 0 }}
-                    animate={{ count: 100 }}
-                    transition={{ duration: 1.6, delay: 2.6, ease: "linear" }}
-                  >
-                    {progress => `${Math.floor(progress)}%`}
-                  </motion.span>
-                </motion.div>
-              </div>
-              
-              {/* Matrix code effect */}
-              <motion.div 
-                className="mt-6 h-6 overflow-hidden"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 3 }}
-              >
-                <motion.div
-                  animate={{ y: [-20, -180] }}
-                  transition={{ 
-                    duration: 2,
-                    delay: 3,
-                    ease: "linear"
-                  }}
-                  className="font-mono text-[#4CC9F0] text-xs opacity-70"
-                >
-                  <p>Initializing modules...</p>
-                  <p>Loading components...</p>
-                  <p>Analyzing structures...</p>
-                  <p>Deploying neural networks...</p>
-                  <p>Setting up environment...</p>
-                  <p>System ready...</p>
-                </motion.div>
-              </motion.div>
-            </div>
-            
-            {/* Tech floating elements */}
-            <div className="absolute inset-0 pointer-events-none">
-              {/* Circuit patterns */}
-              <svg className="absolute opacity-10" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                  <linearGradient id="circuitGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stopColor="#4CC9F0" />
-                    <stop offset="100%" stopColor="#7209B7" />
-                  </linearGradient>
-                </defs>
-                <motion.path
-                  d="M100,100 L200,100 L200,200 L300,200 L300,300 L400,300 L400,400"
-                  stroke="url(#circuitGrad)"
-                  strokeWidth="2"
-                  fill="none"
-                  initial={{ pathLength: 0, opacity: 0 }}
-                  animate={{ pathLength: 1, opacity: 0.3 }}
-                  transition={{ duration: 2, delay: 1 }}
-                />
-                <motion.path
-                  d="M500,100 L400,100 L400,200 L300,200 L300,300 L200,300 L200,400"
-                  stroke="url(#circuitGrad)"
-                  strokeWidth="2"
-                  fill="none"
-                  initial={{ pathLength: 0, opacity: 0 }}
-                  animate={{ pathLength: 1, opacity: 0.3 }}
-                  transition={{ duration: 2, delay: 1.3 }}
-                />
-              </svg>
-              
-              {/* Digital squares fading in and out */}
-              {[...Array(12)].map((_, i) => (
-                <motion.div
-                  key={`square-${i}`}
-                  className="absolute rounded-md border border-[#4CC9F0]"
-                  style={{
-                    width: Math.random() * 50 + 10,
-                    height: Math.random() * 50 + 10,
-                    left: `${Math.random() * 100}%`,
-                    top: `${Math.random() * 100}%`,
-                    opacity: 0.2
-                  }}
-                  initial={{ scale: 0, rotate: 0 }}
-                  animate={{ 
-                    scale: [0, 1, 1, 0],
-                    rotate: Math.random() > 0.5 ? 90 : -90,
-                    opacity: [0, 0.2, 0.2, 0]
-                  }}
-                  transition={{
-                    duration: Math.random() * 4 + 2,
-                    delay: Math.random() * 3,
-                    repeat: Infinity,
-                    repeatDelay: Math.random() * 3
-                  }}
-                />
-              ))}
-              
-              {/* Pulsing gradient blobs */}
-              {[...Array(3)].map((_, i) => (
-                <motion.div
-                  key={`blob-${i}`}
-                  className="absolute rounded-full blur-3xl"
-                  style={{
-                    background: i === 0 ? 'rgba(76, 201, 240, 0.1)' : i === 1 ? 'rgba(67, 97, 238, 0.1)' : 'rgba(114, 9, 183, 0.1)',
-                    width: 300 + (i * 100),
-                    height: 300 + (i * 100),
-                    x: (i - 1) * 300,
-                    y: (i - 1) * 200,
-                  }}
-                  animate={{
-                    scale: [0.8, 1.2, 0.8],
-                    opacity: [0.3, 0.5, 0.3],
-                  }}
-                  transition={{
-                    duration: 8 + i * 2,
-                    repeat: Infinity,
-                    delay: i * 2,
-                  }}
-                />
-              ))}
-            </div>
-            
-            {/* Digital glitch effect */}
-            <motion.div 
-              className="absolute inset-0 bg-[#4CC9F0] mix-blend-overlay"
-              animate={{ opacity: [0, 0.05, 0, 0.02, 0] }}
-              transition={{
-                duration: 0.2,
-                repeat: Infinity,
-                repeatDelay: Math.random() * 5 + 3
-              }}
-            />
-            
-            {/* Scanning line effect */}
-            <motion.div
-              className="absolute inset-0 overflow-hidden opacity-30 pointer-events-none"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 0.3 }}
-              transition={{ delay: 2 }}
-            >
-              <motion.div
-                className="absolute w-full h-[2px] bg-gradient-to-r from-transparent via-[#4CC9F0] to-transparent"
-                animate={{ y: [-100, window.innerHeight + 100] }}
-                transition={{
-                  duration: 2,
-                  repeat: Infinity,
-                  ease: "linear",
-                  repeatDelay: 1
-                }}
-              />
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    );
-  };
-  
   const handleProblemStatementsClick = (e) => {
     e.preventDefault();
     navigate('/problem-statements');
@@ -836,8 +427,10 @@ const Hero = () => {
   
   return (
     <>
-      {/* Loading Screen */}
-      <LoadingScreen />
+      {/* New Loading Screen */}
+      <AnimatePresence>
+        {loading && <LoadingScreen />}
+      </AnimatePresence>
       
       {/* Full-screen hero section with just the intro text */}
       <div className="relative h-screen flex items-center justify-center">
@@ -849,7 +442,7 @@ const Hero = () => {
         <motion.div 
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: loading ? 0 : 1, y: loading ? 40 : 0 }}
-          transition={{ duration: 0.7, ease: "easeInOut", delay: loading ? 0 : 0.5 }}
+          transition={{ duration: 0.7, ease: "easeInOut", delay: loading ? 0 : 0.2 }}
           className="relative z-1 max-w-[62rem] mx-auto text-center px-4"
         >
           <h1 className="h1 mb-6">
