@@ -425,3 +425,52 @@ export const expoEvent = {
     "Recruitment opportunities from sponsoring companies"
   ]
 };
+
+// Add FAQ section data
+export const faqs = [
+  {
+    id: "0",
+    question: "Will travel allowances be provided to participants?",
+    answer: "Travel allowances may not be provided to the hackathon participants. Respective Teams have to manage it by there own."
+  },
+  {
+    id: "1",
+    question: "Can the Second round be attended virtually?",
+    answer: "No, participants must have to attend the second round on the given venue physically."
+  },
+  {
+    id: "2",
+    question: "What happens if one of my team members is unable to attend the final round?",
+    answer: "In case a team member cannot attend the final round, the remaining team members can continue to represent the team."
+  },
+  {
+    id: "3",
+    question: "Are we required to build the same project that we submitted in the initial PPT for the offline round?",
+    answer: "No, teams are expected to work on other industry based problem statements that will be given after the declaration of first round."
+  },
+  {
+    id: "4",
+    question: "Can we add 1–2 additional slides to the PPT, or must we strictly follow the given format?",
+    answer: "Participants are expected to adhere to the prescribed PPT format shared in the official guidelines provided on the unstop platform."
+  },
+  {
+    id: "5",
+    question: "What are the criteria for shortlisting PPTs in the first round?",
+    answer: "PPTs will be evaluated based on several factors, including: relevance of the problem statement, Innovativeness and feasibility of the proposed solution, Technical approach and implementation strategy and Presentation quality."
+  },
+  {
+    id: "6",
+    question: "Are we allowed to propose IoT or hardware-based solutions for our ideas?",
+    answer: "Yes, participants are allowed to develop IoT or hardware-based solutions. Ensure your idea addresses the selected problem statement."
+  },
+  {
+    id: "7",
+    question: "When will the results be announced?",
+    answer: "Results will be Declared by 10th of June 2025."
+  },
+  {
+    id: "8",
+    question: "Will accommodation be provided for participants?",
+    answer: "Accommodation along with food will be provided to the top 35 selected teams, and only a minimum charge will be collected to cover the basic facilities and services."
+  }
+];
